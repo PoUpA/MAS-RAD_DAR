@@ -1,0 +1,370 @@
+@prefix : <http://www.jcchatelain.ch/cryptotrading#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix xml: <http://www.w3.org/XML/1998/namespace> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix foaf: <http://xmlns.com/foaf/0.1/> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@base <http://www.jcchatelain.ch/cryptotrading> .
+
+<http://www.jcchatelain.ch/cryptotrading> rdf:type owl:Ontology .
+
+#################################################################
+#    Datatypes
+#################################################################
+
+###  http://xmlns.com/foaf/0.1/mbox
+foaf:mbox rdf:type rdfs:Datatype .
+
+
+###  http://xmlns.com/foaf/0.1/name
+foaf:name rdf:type rdfs:Datatype .
+
+
+#################################################################
+#    Object Properties
+#################################################################
+
+###  http://www.jcchatelain.ch/cryptotrading#base
+:base rdf:type owl:ObjectProperty ,
+               owl:TransitiveProperty ;
+      rdfs:domain :Pair ;
+      rdfs:range :FinancialInstrument .
+
+
+###  http://www.jcchatelain.ch/cryptotrading#basedOn
+:basedOn rdf:type owl:ObjectProperty ;
+         rdfs:subPropertyOf owl:topObjectProperty .
+
+
+###  http://www.jcchatelain.ch/cryptotrading#place
+:place rdf:type owl:ObjectProperty ;
+       rdfs:domain :Trader ;
+       rdfs:range :Order .
+
+
+###  http://www.jcchatelain.ch/cryptotrading#placeLimit
+:placeLimit rdf:type owl:ObjectProperty ;
+            rdfs:subPropertyOf :place ;
+            rdfs:domain :Trader ;
+            rdfs:range :LimitOrder .
+
+
+###  http://www.jcchatelain.ch/cryptotrading#placeMarket
+:placeMarket rdf:type owl:ObjectProperty ;
+             rdfs:subPropertyOf :place ;
+             rdfs:domain :Trader ;
+             rdfs:range :MarketOrder .
+
+
+###  http://www.jcchatelain.ch/cryptotrading#provide
+:provide rdf:type owl:ObjectProperty ;
+         rdfs:domain :Exchange ;
+         rdfs:range :Pair .
+
+
+###  http://www.jcchatelain.ch/cryptotrading#registeredOn
+:registeredOn rdf:type owl:ObjectProperty ;
+              rdfs:domain :Trader ;
+              rdfs:range :Exchange .
+
+
+###  http://www.jcchatelain.ch/cryptotrading#side
+:side rdf:type owl:ObjectProperty ;
+      rdfs:domain :Order ;
+      rdfs:range :OrderSide .
+
+
+###  http://www.jcchatelain.ch/cryptotrading#target
+:target rdf:type owl:ObjectProperty ,
+                 owl:TransitiveProperty ;
+        rdfs:domain :Pair ;
+        rdfs:range :FinancialInstrument .
+
+
+#################################################################
+#    Data properties
+#################################################################
+
+###  http://www.jcchatelain.ch/cryptotrading#Abbreviation
+:Abbreviation rdf:type owl:DatatypeProperty ;
+              rdfs:domain :FinancialInstrument ;
+              rdfs:range xsd:string .
+
+
+###  http://www.jcchatelain.ch/cryptotrading#ask
+:ask rdf:type owl:DatatypeProperty ;
+     rdfs:domain :Pair ;
+     rdfs:range xsd:decimal .
+
+
+###  http://www.jcchatelain.ch/cryptotrading#bid
+:bid rdf:type owl:DatatypeProperty ;
+     rdfs:domain :Pair ;
+     rdfs:range xsd:decimal .
+
+
+###  http://www.jcchatelain.ch/cryptotrading#description
+:description rdf:type owl:DatatypeProperty ;
+             rdfs:domain :OrderSide ;
+             rdfs:range xsd:string .
+
+
+###  http://www.jcchatelain.ch/cryptotrading#displayName
+:displayName rdf:type owl:DatatypeProperty ;
+             rdfs:domain :Pair ;
+             rdfs:range xsd:string .
+
+
+###  http://www.jcchatelain.ch/cryptotrading#entryPrice
+:entryPrice rdf:type owl:DatatypeProperty ;
+            rdfs:domain :LimitOrder ;
+            rdfs:range xsd:decimal .
+
+
+###  http://www.jcchatelain.ch/cryptotrading#fullName
+:fullName rdf:type owl:DatatypeProperty ;
+          rdfs:domain :FinancialInstrument ;
+          rdfs:range xsd:string .
+
+
+###  http://www.jcchatelain.ch/cryptotrading#sign
+:sign rdf:type owl:DatatypeProperty ;
+      rdfs:domain :OrderSide ;
+      rdfs:range xsd:boolean .
+
+
+###  http://www.jcchatelain.ch/cryptotrading#size
+:size rdf:type owl:DatatypeProperty ;
+      rdfs:domain :Order ;
+      rdfs:range xsd:decimal .
+
+
+###  http://www.jcchatelain.ch/cryptotrading#url
+:url rdf:type owl:DatatypeProperty ;
+     rdfs:domain :Exchange ;
+     rdfs:range xsd:string .
+
+
+###  http://www.jcchatelain.ch/cryptotrading#username
+:username rdf:type owl:DatatypeProperty ;
+          rdfs:domain :Trader ;
+          rdfs:range xsd:string .
+
+
+###  http://xmlns.com/foaf/0.1/mbox
+foaf:mbox rdf:type owl:DatatypeProperty ;
+          rdfs:subPropertyOf owl:topDataProperty ;
+          rdfs:domain :Trader ;
+          rdfs:range foaf:mbox .
+
+
+###  http://xmlns.com/foaf/0.1/name
+foaf:name rdf:type owl:DatatypeProperty ;
+          rdfs:subPropertyOf owl:topDataProperty ;
+          rdfs:domain :Exchange ;
+          rdfs:range xsd:string .
+
+
+#################################################################
+#    Classes
+#################################################################
+
+###  http://www.jcchatelain.ch/cryptotrading#Coin
+:Coin rdf:type owl:Class ;
+      rdfs:subClassOf :FinancialInstrument .
+
+
+###  http://www.jcchatelain.ch/cryptotrading#Exchange
+:Exchange rdf:type owl:Class .
+
+
+###  http://www.jcchatelain.ch/cryptotrading#Fiat
+:Fiat rdf:type owl:Class ;
+      rdfs:subClassOf :FinancialInstrument .
+
+
+###  http://www.jcchatelain.ch/cryptotrading#FinancialInstrument
+:FinancialInstrument rdf:type owl:Class .
+
+
+###  http://www.jcchatelain.ch/cryptotrading#LimitOrder
+:LimitOrder rdf:type owl:Class ;
+            rdfs:subClassOf :Order .
+
+
+###  http://www.jcchatelain.ch/cryptotrading#MarketOrder
+:MarketOrder rdf:type owl:Class ;
+             rdfs:subClassOf :Order .
+
+
+###  http://www.jcchatelain.ch/cryptotrading#Order
+:Order rdf:type owl:Class .
+
+
+###  http://www.jcchatelain.ch/cryptotrading#OrderSide
+:OrderSide rdf:type owl:Class .
+
+
+###  http://www.jcchatelain.ch/cryptotrading#Pair
+:Pair rdf:type owl:Class .
+
+
+###  http://www.jcchatelain.ch/cryptotrading#Token
+:Token rdf:type owl:Class ;
+       rdfs:subClassOf :Coin .
+
+
+###  http://www.jcchatelain.ch/cryptotrading#Trader
+:Trader rdf:type owl:Class .
+
+
+#################################################################
+#    Individuals
+#################################################################
+
+###  http://www.jcchatelain.ch/cryptotrading:BAT
+<http://www.jcchatelain.ch/cryptotrading:BAT> rdf:type owl:NamedIndividual ,
+                                                       :Token ;
+                                              :Abbreviation "BAT"^^xsd:string ;
+                                              :fullName "Basic Attention Token"^^xsd:string .
+
+
+###  http://www.jcchatelain.ch/cryptotrading:BTC_USD
+<http://www.jcchatelain.ch/cryptotrading:BTC_USD> rdf:type owl:NamedIndividual ,
+                                                           :Pair ;
+                                                  :base <http://www.jcchatelain.ch/cryptotrading:Bitcoin> ;
+                                                  :target <http://www.jcchatelain.ch/cryptotrading:USD> ;
+                                                  :ask 9589 ;
+                                                  :bid 9589.5 .
+
+
+###  http://www.jcchatelain.ch/cryptotrading:Binance
+<http://www.jcchatelain.ch/cryptotrading:Binance> rdf:type owl:NamedIndividual ,
+                                                           :Exchange ;
+                                                  :provide <http://www.jcchatelain.ch/cryptotrading:ETH_BAT> ;
+                                                  :url "https://www.binance.com"^^xsd:string ;
+                                                  foaf:name "Binance"^^foaf:name .
+
+
+###  http://www.jcchatelain.ch/cryptotrading:Bitcoin
+<http://www.jcchatelain.ch/cryptotrading:Bitcoin> rdf:type owl:NamedIndividual ,
+                                                           :Coin ;
+                                                  :Abbreviation "BTC"^^xsd:string ;
+                                                  :fullName "Bitcoin"^^xsd:string .
+
+
+###  http://www.jcchatelain.ch/cryptotrading:Bob
+<http://www.jcchatelain.ch/cryptotrading:Bob> rdf:type owl:NamedIndividual ,
+                                                       :Trader ;
+                                              :placeMarket <http://www.jcchatelain.ch/cryptotrading:MarketOrder_1> ,
+                                                           <http://www.jcchatelain.ch/cryptotrading:MarketOrder_2> ;
+                                              :registeredOn <http://www.jcchatelain.ch/cryptotrading:Binance> ,
+                                                            <http://www.jcchatelain.ch/cryptotrading:Kraken> ;
+                                              :username "BobbyBob"^^xsd:string ;
+                                              foaf:mbox "bob@bob.com"^^xsd:string .
+
+
+###  http://www.jcchatelain.ch/cryptotrading:CHF
+<http://www.jcchatelain.ch/cryptotrading:CHF> rdf:type owl:NamedIndividual ,
+                                                       :Fiat ;
+                                              :Abbreviation "CHF"^^xsd:string ;
+                                              :fullName "Swiss Franc"^^xsd:string .
+
+
+###  http://www.jcchatelain.ch/cryptotrading:ETH_BAT
+<http://www.jcchatelain.ch/cryptotrading:ETH_BAT> rdf:type owl:NamedIndividual ,
+                                                           :Pair ;
+                                                  :base <http://www.jcchatelain.ch/cryptotrading:Ethereum> ;
+                                                  :target <http://www.jcchatelain.ch/cryptotrading:BAT> ;
+                                                  :ask 0.0009637 ;
+                                                  :bid 0.0009705 .
+
+
+###  http://www.jcchatelain.ch/cryptotrading:Ethereum
+<http://www.jcchatelain.ch/cryptotrading:Ethereum> rdf:type owl:NamedIndividual ,
+                                                            :Coin ;
+                                                   :Abbreviation "ETH"^^xsd:string ;
+                                                   :fullName "Ethereum"^^xsd:string .
+
+
+###  http://www.jcchatelain.ch/cryptotrading:KNC
+<http://www.jcchatelain.ch/cryptotrading:KNC> rdf:type owl:NamedIndividual ,
+                                                       :Token ;
+                                              :Abbreviation "KNC"^^xsd:string ,
+                                                            "KyberNetwork"^^xsd:string .
+
+
+###  http://www.jcchatelain.ch/cryptotrading:Kraken
+<http://www.jcchatelain.ch/cryptotrading:Kraken> rdf:type owl:NamedIndividual ,
+                                                          :Exchange ;
+                                                 :url "https://www.kraken.com"^^xsd:string ;
+                                                 foaf:name "Kraken"^^foaf:name .
+
+
+###  http://www.jcchatelain.ch/cryptotrading:LimitOrder_1
+<http://www.jcchatelain.ch/cryptotrading:LimitOrder_1> rdf:type owl:NamedIndividual ,
+                                                                :LimitOrder ;
+                                                       :basedOn <http://www.jcchatelain.ch/cryptotrading:BTC_USD> ;
+                                                       :side <http://www.jcchatelain.ch/cryptotrading:Short> ;
+                                                       :entryPrice 9406.5 ;
+                                                       :size 500 .
+
+
+###  http://www.jcchatelain.ch/cryptotrading:LimitOrder_2
+<http://www.jcchatelain.ch/cryptotrading:LimitOrder_2> rdf:type owl:NamedIndividual ,
+                                                                :LimitOrder ;
+                                                       :basedOn <http://www.jcchatelain.ch/cryptotrading:ETH_BAT> ;
+                                                       :side <http://www.jcchatelain.ch/cryptotrading:Long> ;
+                                                       :entryPrice 0.000951 ;
+                                                       :size 100 .
+
+
+###  http://www.jcchatelain.ch/cryptotrading:Long
+<http://www.jcchatelain.ch/cryptotrading:Long> rdf:type owl:NamedIndividual ,
+                                                        :OrderSide ;
+                                               :description "Long"^^xsd:string ;
+                                               :sign "true"^^xsd:boolean .
+
+
+###  http://www.jcchatelain.ch/cryptotrading:MarketOrder_1
+<http://www.jcchatelain.ch/cryptotrading:MarketOrder_1> rdf:type owl:NamedIndividual ,
+                                                                 :MarketOrder ;
+                                                        :basedOn <http://www.jcchatelain.ch/cryptotrading:BTC_USD> ;
+                                                        :side <http://www.jcchatelain.ch/cryptotrading:Short> ;
+                                                        :size "37"^^xsd:string .
+
+
+###  http://www.jcchatelain.ch/cryptotrading:MarketOrder_2
+<http://www.jcchatelain.ch/cryptotrading:MarketOrder_2> rdf:type owl:NamedIndividual ,
+                                                                 :MarketOrder ;
+                                                        :basedOn <http://www.jcchatelain.ch/cryptotrading:ETH_BAT> ;
+                                                        :size 1300 .
+
+
+###  http://www.jcchatelain.ch/cryptotrading:Short
+<http://www.jcchatelain.ch/cryptotrading:Short> rdf:type owl:NamedIndividual ,
+                                                         :OrderSide ;
+                                                :description "Short"^^xsd:string ;
+                                                :sign "false"^^xsd:boolean .
+
+
+###  http://www.jcchatelain.ch/cryptotrading:USD
+<http://www.jcchatelain.ch/cryptotrading:USD> rdf:type owl:NamedIndividual ,
+                                                       :Fiat ;
+                                              :Abbreviation "USD"^^xsd:string ;
+                                              :fullName "U.S. Dollar"^^xsd:string .
+
+
+###  http://www.jcchatelain.ch/cryptotrading:WallE
+<http://www.jcchatelain.ch/cryptotrading:WallE> rdf:type owl:NamedIndividual ,
+                                                         :Trader ;
+                                                :placeLimit <http://www.jcchatelain.ch/cryptotrading:LimitOrder_1> ,
+                                                            <http://www.jcchatelain.ch/cryptotrading:LimitOrder_2> ;
+                                                :registeredOn <http://www.jcchatelain.ch/cryptotrading:Binance> ,
+                                                              <http://www.jcchatelain.ch/cryptotrading:Kraken> ;
+                                                :username "WallyRobot"^^xsd:string ;
+                                                foaf:mbox "bot@bot.com"^^foaf:mbox .
+
+
+###  Generated by the OWL API (version 4.5.9.2019-02-01T07:24:44Z) https://github.com/owlcs/owlapi
