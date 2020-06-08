@@ -513,7 +513,7 @@ public class CryptotradingOntology {
 				while (result.hasNext()) {
 					BindingSet currentStatement = result.next();
 					
-					String line = "Bob's number of orders : " + currentStatement.getValue("orderCount	");
+					String line = "Bob's number of orders : " + currentStatement.getValue("orderCount");
 					System.out.println(line);
 				}
 			}
